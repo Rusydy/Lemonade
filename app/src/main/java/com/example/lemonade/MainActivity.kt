@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -72,13 +71,19 @@ fun LemonadeApp() {
         Column(
             modifier = Modifier.padding(innerPadding),
         ) {
-            Lemonade()
+            LemonadePage(
+                image = R.drawable.lemon_tree,
+                imageDescription = R.string.lemon_select,
+            )
         }
     }
 }
 
 @Composable
-fun Lemonade() {
+fun LemonadePage(
+    image: Int = R.drawable.lemon_tree,
+    imageDescription: Int = R.string.lemon_select,
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
@@ -89,7 +94,7 @@ fun Lemonade() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Image(
-                painter = painterResource(id = R.drawable.lemon_tree),
+                painter = painterResource(id = image),
                 contentDescription = stringResource(id = R.string.lemon_tree),
                 modifier = Modifier
                     .padding(16.dp)
@@ -101,8 +106,7 @@ fun Lemonade() {
             )
 
             Text(
-                text = stringResource(id = R.string.lemon_select),
-                modifier = Modifier.padding(16.dp)
+                text = stringResource(id = imageDescription), modifier = Modifier.padding(16.dp)
             )
         }
     }
