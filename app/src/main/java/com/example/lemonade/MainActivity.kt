@@ -55,6 +55,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LemonadeApp() {
     var taps by remember { mutableIntStateOf(1) }
+    var requiredTaps by remember { mutableIntStateOf((2..5).random()) }
 
     val pages = mapOf(
         1 to Pair(R.drawable.lemon_tree, R.string.lemon_select),
@@ -88,7 +89,16 @@ fun LemonadeApp() {
             LemonadePage(image = pages.getValue(taps).first,
                 imageDescription = pages.getValue(taps).second,
                 onImageClick = {
-                    taps = if (taps < 4) taps + 1 else 1
+                    if (taps == 2) {
+                        if (requiredTaps > 1) {
+                            requiredTaps--
+                        } else {
+                            taps++
+                            requiredTaps = (2..5).random()
+                        }
+                    } else {
+                        taps = if (taps < 4) taps + 1 else 1
+                    }
                 })
         }
     }
