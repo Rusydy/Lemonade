@@ -19,13 +19,37 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LemonadeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                LemonadeApp()
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LemonadeApp() {
+    Scaffold(topBar = {
+        TopAppBar(colors = topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            titleContentColor = MaterialTheme.colorScheme.primary,
+        ), title = {
+            Box(
+                modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = stringResource(id = R.string.app_name),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .clip(MaterialTheme.shapes.medium)
+                )
+            }
+        })
+    }) { innerPadding ->
+        Column(
+            modifier = Modifier.padding(innerPadding),
+        ) {
+            Lemonade()
         }
     }
 }
@@ -38,10 +62,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+@Preview(showBackground = true, showSystemUi = true)
+fun LemonadePreview() {
     LemonadeTheme {
-        Greeting("Android")
+        LemonadeApp()
     }
 }
