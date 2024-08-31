@@ -55,11 +55,32 @@ fun LemonadeApp() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun Lemonade() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background,
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.lemon_tree),
+                contentDescription = stringResource(id = R.string.lemon_tree),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .background(
+                        color = Color(0xFFCBEBD7), shape = MaterialTheme.shapes.large
+                    )
+            )
+
+            Text(
+                text = stringResource(id = R.string.lemon_select),
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
 }
 
 @Composable
