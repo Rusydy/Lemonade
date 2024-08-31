@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -92,6 +93,8 @@ fun Lemonade() {
                 contentDescription = stringResource(id = R.string.lemon_tree),
                 modifier = Modifier
                     .padding(16.dp)
+                    .size(150.dp)
+                    .clip(MaterialTheme.shapes.large)
                     .background(
                         color = ImageBackgroundColour,
                     )
