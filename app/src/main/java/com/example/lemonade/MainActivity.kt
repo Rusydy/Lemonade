@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,6 +54,15 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LemonadeApp() {
+    var taps by remember { mutableIntStateOf(1) }
+
+    val pages = mapOf(
+        1 to Pair(R.drawable.lemon_tree, R.string.lemon_select),
+        2 to Pair(R.drawable.lemon_squeeze, R.string.lemon_squeeze),
+        3 to Pair(R.drawable.lemon_drink, R.string.lemon_drink),
+        4 to Pair(R.drawable.lemon_restart, R.string.lemon_restart),
+    )
+
     Scaffold(topBar = {
         TopAppBar(colors = topAppBarColors(
             containerColor = AppBarColour,
@@ -71,10 +85,11 @@ fun LemonadeApp() {
         Column(
             modifier = Modifier.padding(innerPadding),
         ) {
-            LemonadePage(
-                image = R.drawable.lemon_tree,
-                imageDescription = R.string.lemon_select,
-            )
+            LemonadePage(image = pages.getValue(taps).first,
+                imageDescription = pages.getValue(taps).second,
+                onImageClick = {
+                    taps = if (taps < 4) taps + 1 else 1
+                })
         }
     }
 }
@@ -83,6 +98,7 @@ fun LemonadeApp() {
 fun LemonadePage(
     image: Int = R.drawable.lemon_tree,
     imageDescription: Int = R.string.lemon_select,
+    onImageClick: () -> Unit,
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -93,8 +109,7 @@ fun LemonadePage(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Image(
-                painter = painterResource(id = image),
+            Image(painter = painterResource(id = image),
                 contentDescription = stringResource(id = R.string.lemon_tree),
                 modifier = Modifier
                     .padding(16.dp)
@@ -103,7 +118,7 @@ fun LemonadePage(
                     .background(
                         color = ImageBackgroundColour,
                     )
-            )
+                    .clickable { onImageClick() })
 
             Text(
                 text = stringResource(id = imageDescription), modifier = Modifier.padding(16.dp)
