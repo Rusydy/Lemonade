@@ -29,6 +29,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.lemonade.ui.theme.AppBarColour
+import com.example.lemonade.ui.theme.ImageBackgroundColour
 import com.example.lemonade.ui.theme.LemonadeTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,7 +50,7 @@ class MainActivity : ComponentActivity() {
 fun LemonadeApp() {
     Scaffold(topBar = {
         TopAppBar(colors = topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            containerColor = AppBarColour,
             titleContentColor = MaterialTheme.colorScheme.primary,
         ), title = {
             Box(
@@ -89,7 +91,7 @@ fun Lemonade() {
                 modifier = Modifier
                     .padding(16.dp)
                     .background(
-                        color = Color(0xFFCBEBD7), shape = MaterialTheme.shapes.large
+                        color = ImageBackgroundColour,
                     )
             )
 
